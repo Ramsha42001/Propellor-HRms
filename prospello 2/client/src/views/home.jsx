@@ -70,13 +70,6 @@ function Home() {
                                 className='border border-gray-300 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
                             <input
-                                type='email'
-                                placeholder='Email'
-                                value={newEmployee.email}
-                                onChange={(e) => setNewEmployee({ ...newEmployee, email: e.target.value })}
-                                className='border border-gray-300 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            />
-                            <input
                                 type='text'
                                 placeholder='Department'
                                 value={newEmployee.department}
