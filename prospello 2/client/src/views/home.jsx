@@ -7,10 +7,7 @@ function Home() {
     const [newEmployee, setNewEmployee] = useState({
         name: '',
         position: '',
-        email: '',
         department: '',
-        joiningDate: '',
-        leaves: 0,
         salary: 0,
     });
 
@@ -32,21 +29,19 @@ function Home() {
     }, []);
 
     const addEmployee = async () => {
-        if (newEmployee.name && newEmployee.position && newEmployee.email && newEmployee.department && newEmployee.joiningDate && newEmployee.salary) {
+        if (newEmployee.name && newEmployee.position && newEmployee.department && newEmployee.salary) {
             try {
-                const response = await axios.post('/api/employees', newEmployee); // Adjust the URL as needed
+                console.log('Adding employee:', newEmployee);
+                const response = await axios.post('http://localhost:3000/api/employees', newEmployee);
                 setEmployees([...employees, response.data]); // Add the new employee to the state
                 setNewEmployee({
                     name: '',
                     position: '',
-                    email: '',
                     department: '',
-                    joiningDate: '',
-                    leaves: 0,
                     salary: 0,
                 }); // Reset input fields
             } catch (error) {
-                console.error('Error adding employee:', error);
+                console.error('Error adding employee:', error.response ? error.response.data : error.message);
             }
         }
     };
@@ -88,19 +83,8 @@ function Home() {
                                 onChange={(e) => setNewEmployee({ ...newEmployee, department: e.target.value })}
                                 className='border border-gray-300 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
-                            <input
-                                type='date'
-                                value={newEmployee.joiningDate}
-                                onChange={(e) => setNewEmployee({ ...newEmployee, joiningDate: e.target.value })}
-                                className='border border-gray-300 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            />
-                            <input
-                                type='number'
-                                placeholder='Leaves'
-                                value={newEmployee.leaves}
-                                onChange={(e) => setNewEmployee({ ...newEmployee, leaves: e.target.value })}
-                                className='border border-gray-300 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            />
+                        
+                         
                             <input
                                 type='number'
                                 placeholder='Salary'
